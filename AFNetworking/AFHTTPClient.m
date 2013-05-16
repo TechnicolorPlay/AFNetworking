@@ -1041,7 +1041,7 @@ static const NSUInteger AFMultipartBodyStreamProviderDefaultBufferLength = 4096;
     if (_inputStream == nil) {
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
-        CFStreamCreateBoundPair(NULL, &readStream, &writeStream, self.bufferLength);
+        CFStreamCreateBoundPair(NULL, &readStream, &writeStream, (long)self.bufferLength);
         _inputStream = CFBridgingRelease(readStream);
         _outputStream = CFBridgingRelease(writeStream);
         
@@ -1050,7 +1050,7 @@ static const NSUInteger AFMultipartBodyStreamProviderDefaultBufferLength = 4096;
             [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         } else {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+                [self->_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
             });
         }
         [_outputStream open];
@@ -1084,7 +1084,7 @@ static const NSUInteger AFMultipartBodyStreamProviderDefaultBufferLength = 4096;
                 return;
             }
 
-            [_buffer replaceBytesInRange:NSMakeRange(0, numberOfBytesWritten) withBytes:NULL length:0];
+            [_buffer replaceBytesInRange:NSMakeRange(0, (NSUInteger)numberOfBytesWritten) withBytes:NULL length:0];
         } else {
             if (!self.currentHTTPBodyPart) {
                 if (!self.HTTPBodyPartEnumerator) {
