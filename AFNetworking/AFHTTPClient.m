@@ -617,7 +617,7 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
                     originalCompletionBlock();
                 }
 
-                NSInteger numberOfFinishedOperations = [[operations indexesOfObjectsPassingTest:^BOOL(id op, NSUInteger __unused idx,  BOOL __unused *stop) {
+                NSUInteger numberOfFinishedOperations = [[operations indexesOfObjectsPassingTest:^BOOL(id op, NSUInteger __unused idx, BOOL __unused *stop) {
                     return [op isFinished];
                 }] count];
 
@@ -1106,7 +1106,7 @@ static const NSUInteger AFMultipartBodyStreamProviderDefaultBufferLength = 4096;
                 return;
             }
             
-            [_buffer setLength:numberOfBytesRead];
+            [_buffer setLength:(NSUInteger)numberOfBytesRead];
 
             if (numberOfBytesRead == 0) {
                 self.currentHTTPBodyPart = nil;
