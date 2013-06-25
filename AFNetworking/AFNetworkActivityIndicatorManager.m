@@ -28,11 +28,7 @@
 static NSTimeInterval const kAFNetworkActivityIndicatorInvisibilityDelay = 0.17;
 
 @interface AFNetworkActivityIndicatorManager ()
-<<<<<<< HEAD
-@property (readwrite, atomic, assign) NSInteger activityCount;
-=======
 @property (atomic, readwrite, assign) NSInteger activityCount;
->>>>>>> 4a9f460f1766111a976d4c6490f788d9283a9087
 @property (readwrite, nonatomic, strong) NSTimer *activityIndicatorVisibilityTimer;
 @property (readonly, atomic, getter = isNetworkActivityIndicatorVisible) BOOL networkActivityIndicatorVisible;
 
