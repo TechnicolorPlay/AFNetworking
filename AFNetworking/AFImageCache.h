@@ -13,6 +13,7 @@
 
 + (AFImageCache *)af_sharedImageCache;
 + (NSOperationQueue *)af_sharedImageRequestOperationQueue;
++ (dispatch_queue_t)af_sharedImageRequestDispatchQueue;
 
 - (UIImage *)cachedImageForRequest:(NSURLRequest *)request;
 - (void)cacheImage:(UIImage *)image

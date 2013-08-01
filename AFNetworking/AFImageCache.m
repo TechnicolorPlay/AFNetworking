@@ -38,6 +38,17 @@ static inline NSString * AFImageCacheKeyFromURLRequest(NSURLRequest *request) {
     return _af_imageRequestOperationQueue;
 }
 
++ (dispatch_queue_t)af_sharedImageRequestDispatchQueue
+{
+    static dispatch_queue_t af_imageRequestDispatchQueue = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        af_imageRequestDispatchQueue = dispatch_queue_create("com.afnetworking.af_sharedImageRequestDispatchQueue", DISPATCH_QUEUE_CONCURRENT);
+    });
+    
+    return af_imageRequestDispatchQueue;
+}
+
 - (UIImage *)cachedImageForRequest:(NSURLRequest *)request {
     switch ([request cachePolicy]) {
         case NSURLRequestReloadIgnoringCacheData:
